@@ -1,0 +1,53 @@
+/* Question Link 
+https://practice.geeksforgeeks.org/problems/find-the-string-in-grid0111/1
+*/
+
+class Solution
+{
+    public int[][] searchWord(char[][] grid, String word)
+    {
+        List<int[]> ans = new ArrayList<>();
+        int n = grid.length;
+        int m = grid[0].length;
+        
+        int[][] dirs = {{-1, 0}, {0, -1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}};
+       
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == word.charAt(0) && isPossible(grid, word, i, j, dirs)) {
+                    ans.add(new int[]{i, j});
+                }
+            }
+        }
+        
+        int[][] result = new int[ans.size()][2];
+        for (int i = 0; i < ans.size(); i++) {
+            result[i] = ans.get(i);
+        }
+        
+        return result;
+    }
+
+    private boolean isPossible(char[][] grid, String word, int i, int j, int[][] dirs) {
+        int n = grid.length;
+        int m = grid[0].length;
+        
+        for (int[] dir : dirs) {
+            int newi = i;
+            int newj = j;
+            int c = 0;
+            
+            while (newi >= 0 && newj >= 0 && newi < n && newj < m && c < word.length() && grid[newi][newj] == word.charAt(c)) {
+                newi += dir[0];
+                newj += dir[1];
+                c++;
+            }
+            
+            if (c == word.length()) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
