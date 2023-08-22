@@ -1,0 +1,60 @@
+class Solution {
+    public static int findMinOperation(int N, int[][] matrix) {
+        /*
+        matrix is beautiful if the sum of each row and each column is the same
+        find min number of operatinos to make matrix beautiful,
+        in one operation, we can increase
+        
+        the sums can only go up
+        [
+        1 , 2
+        3 , 4
+        ]
+        
+        row sums are 3 and 7
+        col sums are 4 and 6
+        
+        even if we wanted to, we couldn't raise it to the lowest value, so 3 cannot be the final sum
+        if all the row and col sums are different, we must raid it to the max
+        now we can say, find min opreations to raise each row and col to max
+        any row/col who's sum is max, leave alone
+        the number of operations must be the diff between each row/col sum
+        -/
+        */
+        
+        int[] row_sums = new int[N];
+        int[] col_sums = new int[N];
+        int ans = 0;
+        
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < N; j++){
+                row_sums[i] += matrix[i][j];
+                col_sums[j] += matrix[i][j];
+            }
+        }
+        
+        //System.out.println(Arrays.toString(row_sums));
+        //System.out.println(Arrays.toString(col_sums));
+        int raise_to = 0;
+        for (int num : row_sums){
+            raise_to = Math.max(raise_to,num);
+        }
+        
+        for (int num: col_sums){
+            raise_to = Math.max(raise_to,num);
+        }
+        
+        //add diff to and
+        for (int num: row_sums){
+            ans += raise_to - num;
+        }
+        
+        for (int num: col_sums){
+            ans += raise_to - num;
+        }
+        //a count contributed to a cell in a row, also contibutes to the cell in that coll
+        //so we are double counting
+        return ans/2;
+    }
+}
+
