@@ -1,0 +1,16 @@
+/* Question Link
+https://practice.geeksforgeeks.org/problems/palindrome-string0817/1
+
+Given a string S, check if it is palindrome or not.
+*/
+
+class Solution {
+    int isPalindrome(String S) {
+        StringBuffer sb=new StringBuffer(S);
+        if(sb.reverse().toString().equals(S)){
+            return 1;
+        }
+        
+        return 0;
+    }
+}
