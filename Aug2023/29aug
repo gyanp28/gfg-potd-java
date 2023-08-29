@@ -1,0 +1,22 @@
+/* Question Link 
+https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1
+
+Given a singly linked list, remove all the nodes in the list which have any node on their right whose value is greater. (Not just immidiate Right , but entire List on the Right)
+*/
+
+class Solution{
+    Node compute(Node head){
+        Node curr=head;
+        while(curr.next!=null){
+            if(curr.data<curr.next.data){
+                curr.data=curr.next.data;
+                curr.next=curr.next.next;
+                curr=head;
+            }
+            else{
+                curr=curr.next;
+            }
+        }
+        return head;
+    }
+}
